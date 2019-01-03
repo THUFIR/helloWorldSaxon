@@ -18,11 +18,20 @@ repositories {
     // Use jcenter for resolving your dependencies.
     // You can declare any Maven/Ivy/file repository here.
     jcenter()
+    mavenCentral()
+   maven {
+        setUrl("http://repo.spring.io/plugins-release/")
+    }  
 }
 
 dependencies {
     // This dependency is found on compile classpath of this component and consumers.
     implementation("com.google.guava:guava:26.0-jre")
+
+
+    compile (group = "org.ccil.cowan.tagsoup"  , name = "tagsoup"     , version = "1.2.1")
+    compile (group = "net.sf.saxon"            , name = "saxon-HE"   , version = "9.9.0-2")
+
 
     // Use TestNG framework, also requires calling test.useTestNG() below
     testImplementation("org.testng:testng:6.14.3")
