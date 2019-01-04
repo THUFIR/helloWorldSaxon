@@ -4,6 +4,7 @@
     <entry key="gecko">/home/thufir/.gecko/geckodriver</entry>
     <entry key="url">http://books.toscrape.com/</entry>
     <entry key="driver">webdriver.gecko.driver</entry>
+    <entry key="url">http://books.toscrape.com/</entry>
     <entry key="books">http://books.toscrape.com/</entry>
     <entry key="noagenda">http://thufir.github.io/noagenda/</entry>
     <entry key="mobi">https://ebook.online-convert.com/convert-to-mobi</entry>
