@@ -14,7 +14,6 @@ import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.XMLReaderFactory;
 
-
 public class App {
 
     private static final Logger LOG = Logger.getLogger(App.class.getName());
