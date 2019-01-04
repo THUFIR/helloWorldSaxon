@@ -36,30 +36,18 @@ public class HandlerForXML {
     public void createDocumentFromURL() throws SAXException, IOException, TransformerException, ParserConfigurationException {
         LOG.info(url.toString());
 
-        InputStream inputStream = url.openStream();
-
         TransformerFactory transformerFactory = TransformerFactory.newInstance();
         XMLReader xmlReader = XMLReaderFactory.createXMLReader("org.ccil.cowan.tagsoup.Parser");
         Source source = new SAXSource(xmlReader, new InputSource(url.toString()));
 
-        StringWriter writer = new StringWriter();
-        StreamResult streamResult = new StreamResult(writer);
-
-//        DOMResult dr;
         DOMResult domResult = new DOMResult();
         
         Transformer transformer = transformerFactory.newTransformer();
-        transformer.transform(source, domResult);
-//        transformer.transform(source, streamResult);
-
+        transformer.transform(source, domResult);  //how do I know the result of this operation?
         
-        String stringResult = writer.toString();
-        LOG.info(domResult.toString());
+        LOG.info(domResult.toString());  //traverse or iterate how?
         
-        DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-        Document document = db.newDocument();
-       // DOMSource domSource = new DOMSource(db.parse(inputStream));
-
-  //      LOG.info(document.toString());
-    }
+        DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+        Document document = documentBuilder.parse();   ///bzzzt, wrong
+        }
 }
