@@ -26,12 +26,12 @@ public class App {
     }
 
     private void scrapeBooks() throws TransformerConfigurationException, TransformerException, SAXException, IOException     {
-        properties.loadFromXML(App.class.getResourceAsStream("/selenium.xml"));
-        LOG.info(properties.toString());
+        properties.loadFromXML(App.class.getResourceAsStream("/saxon.xml"));
+        String url = properties.getProperty("url");
 
         TransformerFactory factory = TransformerFactory.newInstance();
         XMLReader xmlReader = XMLReaderFactory.createXMLReader("org.ccil.cowan.tagsoup.Parser");
-        Source input = new SAXSource(xmlReader,new InputSource("http://books.toscrape.com/"));
+        Source input = new SAXSource(xmlReader,new InputSource(url));
         Result output = new StreamResult(System.out);
         factory.newTransformer().transform(input, output);
 
