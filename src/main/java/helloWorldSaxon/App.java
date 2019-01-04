@@ -23,7 +23,7 @@ public class App {
         properties.loadFromXML(App.class.getResourceAsStream("/saxon.xml"));
         URL url = new URL(properties.getProperty("books"));
         HandlerForXML h = new HandlerForXML(url);
-        h.fetchDocumentFromURL();
+        h.createDocumentFromURL();
     }
 
 }
