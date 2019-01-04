@@ -25,26 +25,31 @@ public class App {
     private static final Logger LOG = Logger.getLogger(App.class.getName());
     private final Properties properties = new Properties();
 
-    public static void main(String[] args) throws TransformerException, TransformerConfigurationException, SAXException, IOException {
+    public static void main(String[] args) throws TransformerException, TransformerConfigurationException, IOException, SAXException {
         LOG.fine("starting..");
-        new App().scrapeBooks();
+        new App().foo();
     }
 
-    private void foo() throws TransformerConfigurationException, TransformerException {
-            StreamSource source = new StreamSource(new StringReader("<xml>blabla</xml>"));
-            StringWriter writer = new StringWriter();
-            StreamResult result = new StreamResult(writer);
-            TransformerFactory tFactory = TransformerFactory.newInstance();
-            Transformer transformer = tFactory.newTransformer();
-            transformer.transform(source, result);
-            String strResult = writer.toString();
+    private void foo() throws TransformerConfigurationException, TransformerException, IOException, SAXException {
+        properties.loadFromXML(App.class.getResourceAsStream("/saxon.xml"));
+        String url = properties.getProperty("mobi");
+
+        XMLReader xmlReader = XMLReaderFactory.createXMLReader("org.ccil.cowan.tagsoup.Parser");
+        Source input = new SAXSource(xmlReader, new InputSource(url));
+
+      //  StreamSource source = new StreamSource(new StringReader("<xml>blabla</xml>"));
+        StringWriter writer = new StringWriter();
+        StreamResult result = new StreamResult(writer);
+        TransformerFactory tFactory = TransformerFactory.newInstance();
+        Transformer transformer = tFactory.newTransformer();
+        transformer.transform(input, result);
+        String strResult = writer.toString();
+        LOG.info(strResult);
     }
 
     private void scrapeBooks() throws TransformerConfigurationException, TransformerException, SAXException, IOException {
         properties.loadFromXML(App.class.getResourceAsStream("/saxon.xml"));
         String url = properties.getProperty("url");
-
-        File dir = new File(System.getProperty("user.dir"));
 
         TransformerFactory factory = TransformerFactory.newInstance();
         XMLReader xmlReader = XMLReaderFactory.createXMLReader("org.ccil.cowan.tagsoup.Parser");
