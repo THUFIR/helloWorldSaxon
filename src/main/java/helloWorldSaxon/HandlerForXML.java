@@ -1,6 +1,7 @@
 package helloWorldSaxon;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.net.URL;
@@ -13,6 +14,8 @@ import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMResult;
+import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.sax.SAXSource;
 import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Document;
@@ -33,33 +36,25 @@ public class HandlerForXML {
         this.url = url;
     }
 
-    public String fetchFromURL() throws TransformerConfigurationException, TransformerException, IOException, SAXException {
+    public void fetchDocumentFromURL() throws SAXException, IOException, TransformerException, ParserConfigurationException {
+        LOG.info(url.toString());
+
+        DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+        Document document = db.newDocument();
+        InputStream inputStream = url.openStream();
+
         StringWriter writer = new StringWriter();
         StreamResult streamResult = new StreamResult(writer);
 
-        TransformerFactory factory = TransformerFactory.newInstance();
+        TransformerFactory transformerFactory = TransformerFactory.newInstance();
         XMLReader xmlReader = XMLReaderFactory.createXMLReader("org.ccil.cowan.tagsoup.Parser");
         Source source = new SAXSource(xmlReader, new InputSource(url.toString()));
 
-        Transformer transformer = factory.newTransformer();
+        Transformer transformer = transformerFactory.newTransformer();
         transformer.transform(source, streamResult);
 
-        String stringResult = writer.toString();
-        LOG.fine(stringResult);
-        return stringResult;
-    }
+        DOMSource domSource = new DOMSource(db.parse(inputStream));
 
-    public Document parseString(String string) throws ParserConfigurationException, SAXException, IOException {
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder builder = factory.newDocumentBuilder();
-        Document document;
-        document = builder.parse(new InputSource(new StringReader(string)));
-     //   String language = XMLConstants.W3C_XML_SCHEMA_NS_URI;
-     //   SchemaFactory sfactory = SchemaFactory.newInstance(language);
-    //    Schema schema = sfactory.newSchema(); //????  what is the validation schema
-    //    Validator validator = schema.newValidator();
-    //    validator.validate(new DOMSource(document));
-        return document;
+        LOG.info(document.toString());
     }
-
 }
