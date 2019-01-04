@@ -12,7 +12,7 @@ import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.dom.DOMResult;
 import javax.xml.transform.sax.SAXSource;
 import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Document;
@@ -45,15 +45,21 @@ public class HandlerForXML {
         StringWriter writer = new StringWriter();
         StreamResult streamResult = new StreamResult(writer);
 
+//        DOMResult dr;
+        DOMResult domResult = new DOMResult();
+        
         Transformer transformer = transformerFactory.newTransformer();
-        transformer.transform(source, streamResult);
+        transformer.transform(source, domResult);
+//        transformer.transform(source, streamResult);
 
-        LOG.info(streamResult.toString());
+        
+        String stringResult = writer.toString();
+        LOG.info(domResult.toString());
         
         DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
         Document document = db.newDocument();
-        DOMSource domSource = new DOMSource(db.parse(inputStream));
+       // DOMSource domSource = new DOMSource(db.parse(inputStream));
 
-        LOG.info(document.toString());
+  //      LOG.info(document.toString());
     }
 }
