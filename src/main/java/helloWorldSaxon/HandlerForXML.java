@@ -43,11 +43,15 @@ public class HandlerForXML {
         DOMResult domResult = new DOMResult();
         
         Transformer transformer = transformerFactory.newTransformer();
-        transformer.transform(source, domResult);  //how do I know the result of this operation?
+        transformer.transform(source, domResult);  //how do I find the result of this operation?
         
         LOG.info(domResult.toString());  //traverse or iterate how?
         
         DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-        Document document = documentBuilder.parse();   ///bzzzt, wrong
+//        Document document = documentBuilder.parse();   ///bzzzt, wrong
+        
+        Document document = (Document) domResult.getNode();
+
+        LOG.info(document.getDocumentElement().getTagName());
         }
 }
