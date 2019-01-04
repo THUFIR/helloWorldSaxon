@@ -10,6 +10,7 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.sax.SAXSource;
 import javax.xml.transform.stream.StreamResult;
+import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.XMLReaderFactory;
@@ -30,7 +31,7 @@ public class App {
 
         TransformerFactory factory = TransformerFactory.newInstance();
         XMLReader xmlReader = XMLReaderFactory.createXMLReader("org.ccil.cowan.tagsoup.Parser");
-        Source input = new SAXSource(xmlReader, "http://books.toscrape.com/");
+        Source input = new SAXSource(xmlReader,new InputSource("http://books.toscrape.com/"));
         Result output = new StreamResult(System.out);
         factory.newTransformer().transform(input, output);
 
