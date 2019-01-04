@@ -53,16 +53,16 @@ public class HandlerForXML {
         return stringResult;
     }
 
-    public Document buildDocument(String string) throws ParserConfigurationException, SAXException, IOException {
+    public Document parseString(String string) throws ParserConfigurationException, SAXException, IOException {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
         Document document;
         document = builder.parse(string);
-        String language = XMLConstants.W3C_XML_SCHEMA_NS_URI;
-        SchemaFactory sfactory = SchemaFactory.newInstance(language);
-        Schema schema = sfactory.newSchema(); //????  what is the validation schema
-        Validator validator = schema.newValidator();
-        validator.validate(new DOMSource(document));
+     //   String language = XMLConstants.W3C_XML_SCHEMA_NS_URI;
+     //   SchemaFactory sfactory = SchemaFactory.newInstance(language);
+    //    Schema schema = sfactory.newSchema(); //????  what is the validation schema
+    //    Validator validator = schema.newValidator();
+    //    validator.validate(new DOMSource(document));
         return document;
     }
 

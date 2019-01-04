@@ -21,10 +21,10 @@ public class App {
 
     private void scrapeHTML() throws ParserConfigurationException, SAXException, IOException, TransformerException  {
         properties.loadFromXML(App.class.getResourceAsStream("/saxon.xml"));
-        URL url = new URL(properties.getProperty("noagenda"));
+        URL url = new URL(properties.getProperty("books"));
         HandlerForXML h = new HandlerForXML(url);
         String s = h.fetchFromURL();
-        Document d = h.buildDocument(s);
+        Document d = h.parseString(s);
         LOG.fine(d.toString());
     }
 
