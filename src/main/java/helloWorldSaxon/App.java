@@ -25,7 +25,7 @@ public class App {
         HandlerForXML h = new HandlerForXML(url);
         String s = h.fetchFromURL();
         Document d = h.parseString(s);
-        LOG.fine(d.toString());
+        LOG.info(d.toString());
     }
 
 }
