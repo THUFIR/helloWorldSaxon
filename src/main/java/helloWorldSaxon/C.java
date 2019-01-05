@@ -13,11 +13,11 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 //https://stackoverflow.com/q/4142046/262852
-public class B {
+public class C {
 
-    private static final Logger LOG = Logger.getLogger(B.class.getName());
+    private static final Logger LOG = Logger.getLogger(C.class.getName());
 
-    public B() {
+    public C() {
 
     }
 

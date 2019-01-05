@@ -18,7 +18,7 @@ public class App {
         properties.loadFromXML(App.class.getResourceAsStream("/saxon.xml"));
         URL url = new URL(properties.getProperty("books"));
         B b = new B();
-        b.build();
+        b.b2();
     }
 
 }
