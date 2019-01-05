@@ -1,5 +1,7 @@
 package helloWorldSaxon;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.util.logging.Logger;
@@ -16,7 +18,6 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.sax.SAXSource;
 import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Document;
-import org.w3c.dom.Node;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
@@ -44,9 +45,7 @@ public class HandlerForXML {
         DOMResult domResult = new DOMResult();
 
         Transformer transformer = transformerFactory.newTransformer();
-        transformer.transform(source, domResult);  //how do I find the result of this operation?
-
-        LOG.fine(domResult.toString());  //traverse or iterate how?
+        transformer.transform(source, domResult);
 
         DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
         Document document = (Document) domResult.getNode();
@@ -55,7 +54,17 @@ public class HandlerForXML {
     }
 
     public void printDoc(Document document) throws TransformerConfigurationException, TransformerException {
-        Transformer t2 = TransformerFactory.newInstance().newTransformer();
-        t2.transform(new DOMSource(document), new StreamResult(System.out));
+        Transformer transformer = TransformerFactory.newInstance().newTransformer();
+        transformer.transform(new DOMSource(document), new StreamResult(System.out));
+    }
+
+    public void writeToFile(Document document) throws IOException, TransformerException {
+        DOMSource source = new DOMSource(document);
+        FileWriter writer = new FileWriter(new File("/tmp/output.xml"));
+        StreamResult result = new StreamResult(writer);
+
+        TransformerFactory transformerFactory = TransformerFactory.newInstance();
+        Transformer transformer = transformerFactory.newTransformer();
+        transformer.transform(source, result);
     }
 }
