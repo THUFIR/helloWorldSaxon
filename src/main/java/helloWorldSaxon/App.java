@@ -6,7 +6,6 @@ import java.util.Properties;
 import java.util.logging.Logger;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
-import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
 public class App {
