@@ -17,8 +17,9 @@ public class App {
     private void scrapeHTML() throws Exception {
         properties.loadFromXML(App.class.getResourceAsStream("/saxon.xml"));
         URL url = new URL(properties.getProperty("books"));
-        B b = new B();
-        b.b2();
+
+        JaxBExample jxb = new JaxBExample();
+        jxb.readFromFile();
     }
 
 }
