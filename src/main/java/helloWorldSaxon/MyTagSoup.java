@@ -13,7 +13,9 @@ public class MyTagSoup {
     public MyTagSoup() {
     }
 
+    
     /*
+    
     public void foo(Node document) throws Exception {
 
         final Parser parser = new Parser();
@@ -27,5 +29,7 @@ public class MyTagSoup {
         document = sax2dom.getDOM();
 
     }
+
 */
+    
 }
