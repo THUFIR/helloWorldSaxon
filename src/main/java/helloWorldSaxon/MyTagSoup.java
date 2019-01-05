@@ -20,11 +20,11 @@ import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.XMLReaderFactory;
 
-public class Demo {
+public class MyTagSoup {
 
-    private static final Logger LOG = Logger.getLogger(Demo.class.getName());
+    private static final Logger LOG = Logger.getLogger(MyTagSoup.class.getName());
 
-    public Demo() {
+    public MyTagSoup() {
     }
 
     public void writeToFile(Document document) throws Exception {
