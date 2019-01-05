@@ -8,6 +8,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMResult;
@@ -15,6 +16,7 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.sax.SAXSource;
 import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Document;
+import org.w3c.dom.Node;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
@@ -32,8 +34,8 @@ public class HandlerForXML {
         this.url = url;
     }
 
-    public void createDocumentFromURL() throws SAXException, IOException, TransformerException, ParserConfigurationException {
-        LOG.info(url.toString());
+    public Document createDocumentFromURL() throws SAXException, IOException, TransformerException, ParserConfigurationException {
+        LOG.fine(url.toString());
 
         TransformerFactory transformerFactory = TransformerFactory.newInstance();
         XMLReader xmlReader = XMLReaderFactory.createXMLReader("org.ccil.cowan.tagsoup.Parser");
@@ -44,17 +46,16 @@ public class HandlerForXML {
         Transformer transformer = transformerFactory.newTransformer();
         transformer.transform(source, domResult);  //how do I find the result of this operation?
 
-        LOG.info(domResult.toString());  //traverse or iterate how?
+        LOG.fine(domResult.toString());  //traverse or iterate how?
 
         DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-//        Document document = documentBuilder.parse();   ///bzzzt, wrong
-
         Document document = (Document) domResult.getNode();
 
-        LOG.info(document.getDocumentElement().getTagName());
+        return document;
+    }
 
+    public void printDoc(Document document) throws TransformerConfigurationException, TransformerException {
         Transformer t2 = TransformerFactory.newInstance().newTransformer();
         t2.transform(new DOMSource(document), new StreamResult(System.out));
-
     }
 }
