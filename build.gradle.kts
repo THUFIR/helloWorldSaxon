@@ -19,8 +19,6 @@ repositories {
     // You can declare any Maven/Ivy/file repository here.
     jcenter()
     mavenCentral()
-
-
 }
 
 dependencies {
@@ -30,6 +28,7 @@ dependencies {
 
     compile (group = "org.ccil.cowan.tagsoup"  , name = "tagsoup"     , version = "1.2.1")
     compile (group = "net.sf.saxon"            , name = "Saxon-HE"    , version = "9.9.0-2")
+    compile (group = "xalan"                   , name = "xalan"       , version = "2.7.2")
 
 
     // Use TestNG framework, also requires calling test.useTestNG() below
