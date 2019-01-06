@@ -20,10 +20,12 @@ public class App {
         URL url = new URL(properties.getProperty("books"));
 
         JaxBExample jxb = new JaxBExample();
-        customer = jxb.dummyCustomer();
+        for (int i = 0; i < 9; i++) {
+            customer = jxb.dummyCustomer();
+            LOG.info(customer.toString());
+        }
         jxb.writeCustomerToFile(customer);
         customer = jxb.readCustomerFromFile();
-        LOG.info(customer.toString());
     }
 
 }

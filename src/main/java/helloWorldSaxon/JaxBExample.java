@@ -13,6 +13,7 @@ public class JaxBExample {
 
     private static final Logger LOG = Logger.getLogger(JaxBExample.class.getName());
     private String pth = "/home/thufir/jaxb/jaxbexample.xml";
+    private int id = 0;
 
     public JaxBExample() {
     }
@@ -34,9 +35,10 @@ public class JaxBExample {
 
     public Customer dummyCustomer() throws Exception {
         Customer customer = new Customer();
-        customer.setId(100);
+        customer.setId(id);
         customer.setName("mkyong");
-        customer.setAge(29);
+        customer.setAge((int) (Math.random() * 100));
+        id++;
         return customer;
     }
 

@@ -44,7 +44,7 @@ public class Customer {
 
     @Override
     public String toString() {
-        return age + name;
+        return id + "\tname\t" + name + "age\t" + age;
     }
 
 }
