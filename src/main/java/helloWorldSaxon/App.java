@@ -12,16 +12,16 @@ public class App {
 
     public static void main(String[] args) throws Exception {
         LOG.fine("starting..");
-        new App().doStuff();
+        new App().newCustomer();
     }
 
-    private void doStuff() throws Exception {
+    private void newCustomer() throws Exception {
         properties.loadFromXML(App.class.getResourceAsStream("/saxon.xml"));
         URL url = new URL(properties.getProperty("books"));
 
         JaxBExample jxb = new JaxBExample();
-        //   customer = jxb.dummyCustomer();
-        //   jxb.writeCustomerToFile(customer);
+        customer = jxb.dummyCustomer();
+        jxb.writeCustomerToFile(customer);
         customer = jxb.readCustomerFromFile();
         LOG.info(customer.toString());
     }
