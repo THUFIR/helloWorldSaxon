@@ -42,4 +42,9 @@ public class Customer {
         this.id = id;
     }
 
+    @Override
+    public String toString() {
+        return age + name;
+    }
+
 }
