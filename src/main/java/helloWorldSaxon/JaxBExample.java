@@ -27,7 +27,6 @@ public class JaxBExample {
         Marshaller marshaller = jc.createMarshaller();
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
         marshaller.setProperty(Marshaller.JAXB_NO_NAMESPACE_SCHEMA_LOCATION, "/tmp/bla-bla.xsd");
-//        marshaller.marshal(customer, System.out);
         Result result = new DOMResult();
         marshaller.marshal(customer, result);
         return customer;
